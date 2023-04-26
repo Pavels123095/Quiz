@@ -108,8 +108,21 @@
 }
 
 svg.mdi-24px {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
+}
+
+.btn.btn-border-oracle {
+  border-radius: 50%;
+  border: 1px solid rgba(55, 55, 55, 20%);
+}
+
+.btn.btn-border-oracle:hover {
+  border-color: #029934;
+}
+
+.btn.btn-border-oracle:hover svg.mdi-24px {
+  fill: #029934;
 }
 
 .btn.btn-border-oracle.btn-up {
@@ -125,10 +138,18 @@ svg.mdi-24px {
 .quiz-step-fields .field-wrapper {
   width: 100%;
   height: auto;
-  padding: 12px 10px;
   border-radius: 5px;
   margin: 10px 0 10px;
   border: 1px solid rgba(25, 25, 25, 10%);
+  transition: all ease-in-out .3s;
+  -ms-transition: all ease-in-out .3s;
+  -o-transition: all ease-in-out .3s;
+  -moz-transition: all ease-in-out .3s;
+  -webkit-transition: all ease-in-out .3s;
+}
+
+.quiz-step-fields .field-wrapper:hover {
+  border-color: #029934;
 }
 
 .quiz-step-fields .field-wrapper label {
@@ -136,27 +157,74 @@ svg.mdi-24px {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: nowrap;
+  padding: 12px 10px;
   width: 100%;
   height: auto;
+  transition: all ease-in-out .3s;
+  -ms-transition: all ease-in-out .3s;
+  -o-transition: all ease-in-out .3s;
+  -moz-transition: all ease-in-out .3s;
+  -webkit-transition: all ease-in-out .3s;
 }
 
 .quiz-step-fields .field-wrapper input[type=radio] {
   width: 24px;
   height: 24px;
   margin-right: 5px;
+  margin-bottom: 0;
 }
 
 .modal-quiz-wrapper .modal-quiz-content .modal-quiz-title {
-  font-size: 18px;
-  padding: 10px 5px;
+  font-size: 16px;
+  padding: 0 5px 10px 5px;
   line-height: 1.25;
   border-bottom: 1px solid;
   border-color: rgba(50, 50, 50, 20%);
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .modal-quiz-form-control p {
   margin: 0;
+}
+
+.modal-quiz-form-step .offer-form__input,
+.modal-quiz-form-step input {
+  width: 100%;
+  padding: 5px 7px;
+  height: auto;
+  border-radius: 7px;
+  border-color: rgba(55, 55, 55, 20%);
+  border: 1px solid;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.modal-quiz-form-step.step-4.step--active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal-quiz-form-step.step-4 .modal-quiz-subtitle {
+  align-self: baseline;
+}
+
+.form-final {
+  margin: 0 auto;
+}
+
+.modal-quiz-form-step .offer-form__text {
+  text-align: center;
+  color: #444;
+}
+
+.modal-quiz-form-step .button.form-button {
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .modal-quiz-form-control {
@@ -168,4 +236,17 @@ svg.mdi-24px {
   justify-content: space-between;
   flex-wrap: nowrap;
   padding: 10px;
+}
+
+@media (max-width: 580px) {
+  .quiz-step-fields .left-block {
+    padding-right: 5px;
+  }
+
+  .modal-quiz-wrapper .modal-quiz-content {
+    transform: translateY(50px);
+    max-width: 100%;
+    width: calc(100% - 15px);
+  }
+
 }

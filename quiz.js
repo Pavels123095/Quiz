@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   document.querySelector('.modal-quiz-open').addEventListener('click', function () {
     document.querySelector('.modal-quiz-wrapper').classList.add('modal--active');
     document.querySelector('.btn-down').setAttribute('disabled', 'disabled');
+    document.querySelector('.btn-up').setAttribute('disabled', 'disabled');
   });
   document.querySelector('.modal-quiz-close').addEventListener('click', function () {
     document.querySelector('.modal-quiz-wrapper').classList.remove('modal--active');
@@ -19,19 +20,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
   btnnext.addEventListener('click', function (elem) {
-    inputsrequired(elem);
     let n_step = parseInt(step.getAttribute('data-number')) + 1;
-    console.log(n_step);
-    console.log(step);
     document.getElementById('step-view-number').textContent = n_step;
     step.classList.remove('step--active');
     document.querySelector('[data-id="step-' + n_step + '"]').classList.add('step--active');
     step = document.querySelector('.step--active');
     stepup();
+    btnnext.setAttribute('disabled', 'disabled');
   });
 
-  btnprev.addEventListener('click', function (elem) {
-    inputsrequired(elem);
+  btnprev.addEventListener('click', function () {
     let n_step = parseInt(step.getAttribute('data-number')) - 1;
     step.classList.remove('step--active');
     document.getElementById('step-view-number').textContent = n_step;
@@ -40,10 +38,44 @@ document.addEventListener("DOMContentLoaded", (event) => {
     stepup();
   });
 
+  let labels = document.querySelectorAll('.modal-quiz-form-step input[type="radio"]');
+  for (let l = 0; l < labels.length; l++) {
+    if (labels[l] != undefined) {
+      labels[l].addEventListener('change', function (ev) {
+        let n_step = parseInt(step.getAttribute('data-number')) + 1;
+        document.getElementById('step-view-number').textContent = n_step;
+        step.classList.remove('step--active');
+        document.querySelector('[data-id="step-' + n_step + '"]').classList.add('step--active');
+        step = document.querySelector('.step--active');
+        stepup();
+        btnnext.setAttribute('disabled', 'disabled');
+      });
+    }
+  }
+
+  let inputs = document.querySelectorAll('.modal-quiz-form-step input[type="text"]');
+  for (let i = 0; i <= inputs.length; i++) {
+    if (inputs[i] != undefined) {
+      inputs[i].addEventListener('keyup', function (ev) {
+        var elem = ev.target;
+        if (elem.value != '') {
+          btnnext.removeAttribute('disabled');
+        } else {
+          if (elem.value.length == 0) {
+            btnnext.setAttribute('disabled', 'disabled');
+          } else {
+            btnnext.removeAttribute('disabled');
+          }
+        }
+      });
+    }
+  }
+
   function stepup() {
-    if (step.getAttribute('data-number') <= 1) {
+    let n = parseInt(step.getAttribute('data-number'));
+    if (n <= 1) {
       btnprev.setAttribute('disabled', 'disabled');
-    } else if (step.getAttribute('data-number') > 1 && step.getAttribute('data-number') <= 4) {
+    } else if (n > 1 && n <= 4) {
       btnprev.removeAttribute('disabled');
       if (step.getAttribute('data-number') >= 1 && step.getAttribute('data-number') < 4) {
         btnnext.removeAttribute('disabled');
@@ -53,17 +85,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
   }
 
-  function inputsrequired() {
-    //let inputradio = step.querySelectorAll('input[type="radio"]');
-    let inputtext = step.querySelectorAll('input[type="text"]');
-    for (var i; i <= inputtext.length; i++) {
-      if (inputtext[i] == '') {
-        btnnext.setAttribute('disabled');
-        break;
-      } else {
-        btnnext.removeAttribute('disabled');
-      }
-    }
-  }
 
 });
